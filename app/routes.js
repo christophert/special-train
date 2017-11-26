@@ -1,4 +1,6 @@
 // app/routes.js
+const u2f = require('u2f');
+const APP_ID = 'correct horse battery staple';
 module.exports = function(app, passport) {
 
     // =====================================
@@ -45,9 +47,42 @@ module.exports = function(app, passport) {
     // =====================================
     // U2F SECTION =========================
     // =====================================
-    app.get('/u2f_request', function(req, res, next) {
+    app.get('/u2f/register/request', function(req, res, next) {
         const registrationRequest = u2f.request(APP_ID);
+        req.session.registrationRequest = registrationRequest;
+        return res.send(registrationRequest);
     });
+
+    app.post('/u2f/register/challenge', function(req, res, next) {
+        const result = u2f.checkRegistration(req.session.registrationRequest, req.body.registrationResponse);
+        if(result.successful) {
+            //add result.publicKey and result.keyHandle to model
+            req.user.publicKey = result.publicKey;
+            req.user.keyHandle = result.keyHandle;
+            return res.sendStatus(200);
+        }
+        
+        return res.sendStatus({result});
+    }
+
+    app.get('/u2f/auth/request', function(req, res, next) {
+        const keyHandle = req.user.keyHandle;
+        const authRequest = u2f.request(APP_ID, keyHandle);
+        req.session.authRequest = authRequest;
+        
+        res.send(authRequest);
+    });
+
+    app.post('/u2f/auth/challenge', function(req, res, next) {
+        const publicKey = req.user.publicKey;
+        const result = u2f.checkSignature(req.session.authRequest, req.body.authResponse, publicKey);
+        
+        if(result.successful) {
+            return res.sendStatus(200);
+        }
+        return res.send({result});
+    });
+
 
     // =====================================
     // PROFILE SECTION =====================
