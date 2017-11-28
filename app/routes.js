@@ -71,7 +71,7 @@ module.exports = function(app, passport) {
             return res.sendStatus(200);
         }
         
-        return res.sendStatus({result});
+        return res.send({result});
     });
 
     app.get('/u2f/auth/request', function(req, res, next) {
