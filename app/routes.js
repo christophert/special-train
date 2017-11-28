@@ -65,6 +65,7 @@ module.exports = function(app, passport) {
         console.log(result)
         if(result.successful) {
             //add result.publicKey and result.keyHandle to model
+            console.log(req.user);
             req.user.publicKey = result.publicKey;
             req.user.keyHandle = result.keyHandle;
             req.user.save();
