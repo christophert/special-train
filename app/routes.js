@@ -61,8 +61,8 @@ module.exports = function(app, passport) {
     });
 
     app.post('/u2f/register/challenge', function(req, res, next) {
-        console.log(req.body);
         const result = u2f.checkRegistration(req.session.registrationRequest, req.body);
+        console.log(result)
         if(result.successful) {
             //add result.publicKey and result.keyHandle to model
             req.user.publicKey = result.publicKey;
