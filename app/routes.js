@@ -1,6 +1,6 @@
 // app/routes.js
 const u2f = require('u2f');
-const APP_ID = 'correct horse battery staple';
+const APP_ID = 'https://localhost';
 module.exports = function(app, passport) {
 
     // =====================================
@@ -47,6 +47,13 @@ module.exports = function(app, passport) {
     // =====================================
     // U2F SECTION =========================
     // =====================================
+
+    app.get('/u2f/register', isLoggedIn, function(req, res, next) {
+        res.render('u2f-register.ejs', {
+            user: req.user
+        });
+    });
+
     app.get('/u2f/register/request', function(req, res, next) {
         const registrationRequest = u2f.request(APP_ID);
         req.session.registrationRequest = registrationRequest;
@@ -54,16 +61,18 @@ module.exports = function(app, passport) {
     });
 
     app.post('/u2f/register/challenge', function(req, res, next) {
+        console.log(req.body);
         const result = u2f.checkRegistration(req.session.registrationRequest, req.body.registrationResponse);
         if(result.successful) {
             //add result.publicKey and result.keyHandle to model
             req.user.publicKey = result.publicKey;
             req.user.keyHandle = result.keyHandle;
+            req.user.save();
             return res.sendStatus(200);
         }
         
         return res.sendStatus({result});
-    }
+    });
 
     app.get('/u2f/auth/request', function(req, res, next) {
         const keyHandle = req.user.keyHandle;
