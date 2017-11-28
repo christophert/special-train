@@ -1,6 +1,6 @@
 // app/routes.js
 const u2f = require('u2f');
-const APP_ID = 'https://localhost';
+const APP_ID = 'https://u2f-demo.chtr.us';
 module.exports = function(app, passport) {
 
     // =====================================
