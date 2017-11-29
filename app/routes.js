@@ -2,7 +2,7 @@
 const u2f = require('u2f');
 const APP_ID = 'https://u2f-demo.chtr.us';
 var User = require('../app/models/user');
-module.exports = function(app, passport) {
+module.exports = function(app, passport, mongoose) {
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -67,7 +67,7 @@ module.exports = function(app, passport) {
         if(result.successful) {
             //add result.publicKey and result.keyHandle to model
             console.log(req.user);
-            User.update({_id: req.user._id}, {
+            User.update({_id: mongoose.Types.objectId.fromString(req.user._id)}, {
                 u2fPubKey: result.publicKey,
                 u2fKeyHdl: result.keyHandle
             }, function(err, numberAffected, rawResponse) {
