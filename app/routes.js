@@ -1,6 +1,7 @@
 // app/routes.js
 const u2f = require('u2f');
 const APP_ID = 'https://u2f-demo.chtr.us';
+var User = require('../app/models/user');
 module.exports = function(app, passport) {
 
     // =====================================
@@ -66,9 +67,10 @@ module.exports = function(app, passport) {
         if(result.successful) {
             //add result.publicKey and result.keyHandle to model
             console.log(req.user);
-            req.session.passport.user.u2fPubKey = result.publicKey;
-            req.session.passport.user.u2fKeyHdl = result.keyHandle;
-            req.session.save(function(err) {
+            User.update({_id: req.session.passport.user}, {
+                u2fPubKey: result.publicKey,
+                u2fKeyHdl: result.keyHandle
+            }, function(err, numberAffected, rawResponse) {
                 console.log(err);
             });
             return res.sendStatus(200);
