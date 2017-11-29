@@ -67,11 +67,11 @@ module.exports = function(app, passport, mongoose) {
         if(result.successful) {
             //add result.publicKey and result.keyHandle to model
             console.log(req.user);
-            User.update({_id: mongoose.Types.ObjectId.fromString(req.user._id)}, {
+            User.update({_id: new mongoose.Types.ObjectId(req.user._id)}, {
                 u2fPubKey: result.publicKey,
                 u2fKeyHdl: result.keyHandle
             }, function(err, numberAffected, rawResponse) {
-                console.log(err);
+                console.log(err + " " + numberAffected + " " + rawResponse);
             });
             return res.sendStatus(200);
         }
