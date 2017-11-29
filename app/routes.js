@@ -68,7 +68,7 @@ module.exports = function(app, passport, mongoose) {
             //add result.publicKey and result.keyHandle to model
             console.log(req.user);
             console.log(req.user._id);
-            User.update({ 'local.email': req.user.local.email } }, {
+            User.update({ "local.email": req.user.local.email }, {
                 "u2f": {
                     u2fPubKey: result.publicKey,
                     u2fKeyHdl: result.keyHandle
