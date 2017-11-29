@@ -73,10 +73,7 @@ module.exports = function(app, passport, mongoose) {
                 u2fKeyHdl: result.keyHandle
             }, {new: true}, function(err, model) {
                 if(err) {
-                    return res.send(err);
-                }
-                else {
-                    return res.send({model});
+                    return res.send({err});
                 }
             });
             return res.sendStatus(200);
