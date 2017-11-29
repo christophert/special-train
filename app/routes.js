@@ -68,9 +68,11 @@ module.exports = function(app, passport, mongoose) {
             //add result.publicKey and result.keyHandle to model
             console.log(req.user);
             console.log(req.user._id);
-            User.findByIdAndUpdate(new mongoose.Types.ObjectId(req.user._id), {
-                u2fPubKey: result.publicKey,
-                u2fKeyHdl: result.keyHandle
+            User.update({ "local": { "email": req.user.email } }, {
+                "u2f": {
+                    u2fPubKey: result.publicKey,
+                    u2fKeyHdl: result.keyHandle
+                }
             }, {new: true}, function(err, model) {
                 if(err) {
                     return res.send({err});
