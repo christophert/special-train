@@ -67,7 +67,7 @@ module.exports = function(app, passport) {
         if(result.successful) {
             //add result.publicKey and result.keyHandle to model
             console.log(req.user);
-            User.update({_id: req.session.passport.user}, {
+            User.update({_id: req.user._id}, {
                 u2fPubKey: result.publicKey,
                 u2fKeyHdl: result.keyHandle
             }, function(err, numberAffected, rawResponse) {
