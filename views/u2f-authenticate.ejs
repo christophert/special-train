@@ -56,7 +56,7 @@
             type: 'GET',
             success: function(req) {
                 $('#alert_row').html('Press your key').addClass('alert-info').show();
-                u2f.sign([req], function(res) {
+                u2f.sign(req.appId, [req], function(res) {
                     $.ajax({
                         url: '/u2f/auth/challenge',
                         type: 'POST',
@@ -64,10 +64,10 @@
                         success: function(data) {
                             console.log(data);
                             if(data.success === "true") {
-                                $('#alert_row').hide().attr('class', '').html('').addClass('alert alert-success').html('Successfully registered key').show();
+                                $('#alert_row').hide().attr('class', '').html('').addClass('alert alert-success').html('Successfully authenticated').show();
                                 setTimeout(function() { window.location.replace("/profile"); }, 3000);
                             } else {
-                                $('#alert_row').hide().attr('class', '').html('').addClass('alert alert-danger').html(res).show();
+                                $('#alert_row').hide().attr('class', '').html('').addClass('alert alert-danger').html(data).show();
                             }
                         }
                     })
