@@ -95,7 +95,7 @@ module.exports = function(app, passport, mongoose) {
         const authRequest = u2f.request(APP_ID, keyHandle);
         req.session.authRequest = authRequest;
         
-        res.send(authRequest);
+        return res.send(authRequest);
     });
 
     app.post('/u2f/auth/challenge', function(req, res, next) {
