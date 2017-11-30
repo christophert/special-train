@@ -56,7 +56,7 @@
             type: 'GET',
             success: function(req) {
                 $('#alert_row').html('Press your key').addClass('alert-info').show();
-                u2f.sign(req.appId, [req], [], function(res) {
+                u2f.sign(req.appId, [req], function(res) {
                     $.ajax({
                         url: '/u2f/auth/challenge',
                         type: 'POST',
