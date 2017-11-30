@@ -1,43 +1,46 @@
 <!-- views/u2f-register.ejs -->
+<% var page="2fa-register" %>
 <%- include header.ejs %>
 <body>
-<div class="container">
+<%- include nav.ejs %>
+<main role="main">
+    <div class="container">
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-train"></span> U2F Registration</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+        <div class="page-header text-center">
+            <h1><span class="fa fa-train"></span> U2F Registration</h1>
+            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        </div>
 
-    <div class="row">
-        <div id="alert_row" class="alert" style="display:none"></div>
-    </div>
+        <div class="row">
+            <div id="alert_row" class="alert" style="display:none"></div>
+        </div>
 
-    <div class="row">
+        <div class="row">
 
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+            <!-- LOCAL INFORMATION -->
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-user"></span> Local</h3>
 
+                        <p>
+                            <strong>id</strong>: <%= user._id %><br>
+                            <strong>email</strong>: <%= user.local.email %><br>
+                        </p>
+
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3><span class="fa fa-key"></span> U2F Enrollment Status</h3>
                     <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %><br>
-                        <strong>publicKey</strong>: <%= user.u2f.u2fPubKey %><br>
-                        <string>keyHandle</strong>: <%= user.u2f.u2fKeyHdl %>
+                        <strong>U2F Status </strong>: Pending Enrollment<br>
+                        <button type="button" class="btn btn-secondary btn-lg" disabled>Press your key...</a>
                     </p>
-
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-key"></span> U2F</h3>
-                <p>Press your key</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+</main>
 <script src="https://demo.yubico.com/js/u2f-api.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
