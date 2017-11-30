@@ -100,7 +100,7 @@ module.exports = function(app, passport, mongoose) {
 
     app.post('/u2f/auth/challenge', function(req, res, next) {
         const publicKey = req.user.u2f.u2fPubKey;
-        const result = u2f.checkSignature(req.session.authRequest, req.body.authResponse, publicKey);
+        const result = u2f.checkSignature(req.session.authRequest, req.body, publicKey);
         
         if(result.successful) {
             req.session.u2fAuthenticated = true;
