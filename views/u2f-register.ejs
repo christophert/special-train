@@ -62,7 +62,7 @@
                         type: 'POST',
                         data: res,
                         success: function(data) {
-                            if(res === "true") {
+                            if(data == "OK") {
                                 $('#alert_row').hide().attr('class', '').html('').addClass('alert alert-success').html('Successfully registered key').show();
                             } else {
                                 $('#alert_row').hide().attr('class', '').html('').addClass('alert alert-danger').html(data).show();
