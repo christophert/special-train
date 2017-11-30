@@ -1,39 +1,34 @@
 <!-- views/u2f-register.ejs -->
+<% var page="login" %>
 <%- include header.ejs %>
 <body>
-<div class="container">
+<%- include nav.ejs %>
+<main role="main">
+    <div class="container">
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-train"></span> U2F Authentication</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+        <div class="page-header text-center">
+            <h1><span class="fa fa-train"></span> U2F Authentication</h1>
+        </div>
 
-    <div class="row">
-        <div id="alert_row" class="alert" style="display:none"></div>
-    </div>
-
-    <div class="row">
-
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %>
-                    </p>
-
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info">U2F Authentication is requied for this account.</div>
+                <div id="alert_row"></div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-key"></span> U2F</h3>
-                <p>Press your key</p>
+
+        <div class="row">
+
+            <!-- LOCAL INFORMATION -->
+            <div class="col-md-6 md-offset-3">
+                <div class="well">
+                    <h3><span class="fa fa-key"></span> U2F</h3>
+                    <p>Press your key</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</main>
 
 <script src="https://demo.yubico.com/js/u2f-api.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
