@@ -16,7 +16,7 @@
                 <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
             <% } else { %>
                 <li class="nav-item <% if(page == "login") { %> active <% } %>"><a class="nav-link" href="/login">Login</a></li>
-                <li class="nav-item <% if(page == "signup") { %> active <% } %>"><a class="nav-link" href="/register">Signup</a></li>
+                <li class="nav-item <% if(page == "signup") { %> active <% } %>"><a class="nav-link" href="/signup">Signup</a></li>
             <% } %>
 		</ul>
         <% if(typeof(user) !== "undefined") { %>
