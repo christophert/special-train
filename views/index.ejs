@@ -5,19 +5,29 @@
     </style>
 </head>
 <body>
-<div class="container">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="/"><i class="fa fa-train" aria-hidden="true"></i> Special Train</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarDefault">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><a href="/">Home</a></li>
+			<li class="nav-item"><a href="/login">Login</a></li>
+			<li class="nav-item"><a href="/register">Signup</a></li>
+		</ul>
+	</div>
+</nav>
+<main role="main">
+    <div class="jumbotron">
+        <div class="container">
+            <h1><i class="fa fa-train" aria-hidden="true"></i> The Special Train</h1>
+            <h2>Rolling our way...in 2FA! <i>(please clap)</i></h2>
 
-    <div class="jumbotron text-center">
-        <h1><i class="fa fa-train" aria-hidden="true"></i> The Special Train</h1>
-        <h2>Rolling our way...in 2FA! <i>(please clap)</i></h2>
-
-        <p>Access totally top secret government secret secrets here or create your super secret government account here:</p>
-
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
+            <p>Access totally top secret government secret secrets here!</p>
+        </div>
     </div>
-
-</div>
+</main>
 </body>
 </html>
 
