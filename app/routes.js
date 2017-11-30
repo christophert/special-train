@@ -145,7 +145,7 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
-dleware to make sure a user is logged in
+
 function isLoggedInNo2FA(req, res, next) {
 
     // if user is authenticated in the session, carry on 
