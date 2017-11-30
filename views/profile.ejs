@@ -1,47 +1,45 @@
 <!-- views/profile.ejs -->
 <%- include header.ejs %>
 <body>
-<div class="container">
+<%- include nav.ejs %>
+<main role="main">
+    <div class="container">
+        <div class="page-header text-center">
+            <h1><span class="fa fa-train"></span> Profile Page</h1>
+            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        </div>
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-train"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+        <div class="row">
 
-    <div class="row">
+            <!-- LOCAL INFORMATION -->
+            <div class="col-md-6">
+                <div class="well">
+                    <h3><span class="fa fa-user"></span> Local</h3>
 
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+                        <p>
+                            <strong>id</strong>: <%= user._id %><br>
+                            <strong>email</strong>: <%= user.local.email %><br>
+                        </p>
 
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="well">
+                    <h3><span class="fa fa-user"></span> U2F Enrollment Status</h3>
                     <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %><br>
+                        <%if (user.u2f.u2fPubKey != null) { %>
+                            <strong>U2F Status </strong>: Enabled<br>
+                            <strong>Public Key</strong>: <p><%= user.u2f.u2fPubKey %></p>
+                            <strong>Key Handle</strong>: <p><%= user.u2f.u2fKeyHdl %></p>
+                        <% } else { %>
+                            <strong>U2F Status </strong>: Disabled<br>
+                            <a class="btn btn-primary btn-lg" href="/u2f/register">Enroll</a>
+                        <% } %>
                     </p>
-
+                </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> U2F Enrollment Status</h3>
-                <p>
-                    <%if (user.u2f.u2fPubKey != null) { %>
-                        <strong>U2F Status </strong>: Enabled<br>
-                        <strong>Public Key</strong>: <%= user.u2f.u2fPubKey %><br>
-                        <strong>Key Handle</strong>: <%= user.u2f.u2fKeyHdl %>
-                    <% } else { %>
-                        <strong>U2F Status </strong>: Disabled<br>
-                        <a href="/u2f/register"><button class="btn btn-primary">Enroll</button></a>
-                    <% } %>
-                </p>
-            </div>
-        </div>
-
-
     </div>
-
-</div>
+</main>
 </body>
 </html>
