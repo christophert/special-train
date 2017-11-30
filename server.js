@@ -23,6 +23,7 @@ app.use(cookieParser());
 app.use(bodyParser());
 
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(session({ secret: 'correct horse battery staple' }));
 app.use(passport.initialize());
