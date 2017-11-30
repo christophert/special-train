@@ -54,7 +54,8 @@
                         data: res,
                         success: function(data) {
                             if(data == "OK") {
-                                $('#alert_row').hide().attr('class', '').html('').addClass('alert alert-success').html('Successfully registered key').show();
+                                $('#alert_row').hide().attr('class', '').html('').addClass('alert alert-success').html('Successfully registered key! Redirecting in 3 seconds...').show();
+                                setTimeout(function() { window.location.replace("/u2f/authenticate"); }, 3000);
                             } else {
                                 $('#alert_row').hide().attr('class', '').html('').addClass('alert alert-danger').html(data).show();
                             }
