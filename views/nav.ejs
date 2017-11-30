@@ -6,7 +6,7 @@
 	<div class="collapse navbar-collapse" id="navbarDefault">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item <% if(page == "home") { %> active <% } %>"><a class="nav-link" href="/">Home</a></li>
-            <% if(typeof(user) !== "undefined") { %>
+            <% if(typeof(user) !== "undefined" && page !== "2fa-auth") { %>
                 <li class="nav-item <% if(page == "profile") { %> active <% } %>"><a class="nav-link" href="/profile">Profile</a></li>
                 <% if(user.u2f.u2fPubKey !== null)  { %>
                     <li class="nav-item <% if(page == "dank") { %> active <% } %>"><a class="nav-link" href="/dankmemes">Bill's Secret Dank Memes Stash</a></li>
