@@ -104,7 +104,7 @@ module.exports = function(app, passport, mongoose) {
         
         if(result.successful) {
             req.session.u2fAuthenticated = true;
-            return jsonify({"success": true}) 
+            return res.sendStatus(200) 
         }
         return res.send({result});
     });
