@@ -28,12 +28,26 @@
                         <strong>id</strong>: <%= user._id %><br>
                         <strong>email</strong>: <%= user.local.email %><br>
                         <strong>password</strong>: <%= user.local.password %><br>
-                        <strong>publicKey</strong>: <%= user.u2f.u2fPubKey %><br>
-                        <string>keyHandle</strong>: <%= user.u2f.u2fKeyHdl %>
                     </p>
 
             </div>
         </div>
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> U2F Enrollment Status</h3>
+                <p>
+                    <%if user.u2f.u2fPubKey != null { %>
+                        <strong>U2F Status </strong>: Enabled
+                        <strong>Public Key</strong>: <%= user.u2f.u2fPubKey %><br>
+                        <string>Key Handle</strong>: <%= user.u2f.u2fKeyHdl %>
+                    <% } else { %>
+                        <strong>U2F Status </strong>: Disabled
+                        <a href="/u2f/register"><button class="btn btn-primary">Enroll</button></a>
+                    <% } %>
+                </p>
+            </div>
+        </div>
+
 
     </div>
 
