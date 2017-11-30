@@ -36,7 +36,7 @@
             <div class="well">
                 <h3><span class="fa fa-user"></span> U2F Enrollment Status</h3>
                 <p>
-                    <%if user.u2f.u2fPubKey != null { %>
+                    <%if (user.u2f.u2fPubKey != null) { %>
                         <strong>U2F Status </strong>: Enabled
                         <strong>Public Key</strong>: <%= user.u2f.u2fPubKey %><br>
                         <string>Key Handle</strong>: <%= user.u2f.u2fKeyHdl %>
