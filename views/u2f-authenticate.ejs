@@ -38,7 +38,7 @@
             url: '/u2f/auth/request',
             type: 'GET',
             success: function(req) {
-                $('#alert_row').html('Press your key').addClass('alert-info').show();
+                $('#alert_row').html('Press your key').addClass('alert alert-info').show();
                 u2f.sign(req.appId, req.challenge, [req], function(res) {
                     console.log(res);
                     $.ajax({
