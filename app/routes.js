@@ -136,7 +136,7 @@ function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on 
     if (req.isAuthenticated()) {
         if(req.user.u2f.u2fKeyHdl != null && req.session.u2fAuthenticated != true) {
-            res.redirect('/u2f/authenticate');
+            return res.redirect('/u2f/authenticate');
         } else {
             return next();
         }
