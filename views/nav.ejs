@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="/"><i class="fa fa-train" aria-hidden="true"></i> Special Train</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -16,7 +16,7 @@
             <% } %>
 		</ul>
         <% if(typeof(user) !== "undefined") { %>
-            <div class="nav-text">Welcome <%= user.local.email %>
+            <div class="nav-text text-white">Welcome <%= user.local.email %>
         <% } %>
 	</div>
 </nav>
