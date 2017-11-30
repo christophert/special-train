@@ -85,7 +85,7 @@ module.exports = function(app, passport, mongoose) {
     });
 
     app.get('/u2f/auth/request', function(req, res, next) {
-        const keyHandle = req.user.keyHandle;
+        const keyHandle = req.user.u2f.u2fKeyHdl;
         const authRequest = u2f.request(APP_ID, keyHandle);
         req.session.authRequest = authRequest;
         
@@ -93,11 +93,12 @@ module.exports = function(app, passport, mongoose) {
     });
 
     app.post('/u2f/auth/challenge', function(req, res, next) {
-        const publicKey = req.user.publicKey;
+        const publicKey = req.user.u2f.u2fPubKey;
         const result = u2f.checkSignature(req.session.authRequest, req.body.authResponse, publicKey);
         
         if(result.successful) {
-            return res.sendStatus(200);
+            req.session.u2fAuthenticated = true;
+            return jsonify({"success": true}) 
         }
         return res.send({result});
     });
@@ -127,8 +128,13 @@ module.exports = function(app, passport, mongoose) {
 function isLoggedIn(req, res, next) {
 
     // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
+    if (req.isAuthenticated()) {
+        if(req.user.u2f.u2fKeyHdl != null && req.session.u2fAuthenticated != true) {
+            res.redirect('/u2f/authenticate');
+        } else {
+            return next();
+        }
+    }
 
     // if they aren't redirect them to the home page
     res.redirect('/');
