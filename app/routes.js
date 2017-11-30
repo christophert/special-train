@@ -55,6 +55,12 @@ module.exports = function(app, passport, mongoose) {
         });
     });
 
+    app.get('/u2f/authenticate', isLoggedInNo2FA, function(req, res, next) {
+        res.render('u2f-authenticate.ejs', {
+            user: req.user
+        });
+    });
+
     app.get('/u2f/register/request', function(req, res, next) {
         const registrationRequest = u2f.request(APP_ID);
         req.session.registrationRequest = registrationRequest;
@@ -134,6 +140,17 @@ function isLoggedIn(req, res, next) {
         } else {
             return next();
         }
+    }
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+dleware to make sure a user is logged in
+function isLoggedInNo2FA(req, res, next) {
+
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated()) {
+        return next();
     }
 
     // if they aren't redirect them to the home page
